@@ -2,11 +2,10 @@
   "name": "blackjack-blackjack-lukeanderic",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "webpack-dev-server --mode development --content-base docs/ --open --hot"
   },
   "repository": {
     "type": "git",
@@ -22,5 +21,9 @@
     "start": "^5.1.0",
     "yarn": "^1.19.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  }
 }
