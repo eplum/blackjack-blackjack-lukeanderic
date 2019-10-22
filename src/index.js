@@ -4,17 +4,34 @@ const {
   } = require("blackjack-dealer-logic");
   
   singleDeckGame.deal();
-  
- 
-  const userHand = singleDeckGame.getUserHand();
-  
-  generateCard(userHand.getCards()[0]);
-  generateCard(userHand.getCards()[1]);
+
+
+  const dealer = document.createElement("section");
+  dealer.classList.add("dealer-hand");
 
   const dealerHand = singleDeckGame.getDealerHand();
   
-  generateCard(dealerHand.getCards()[0]);
+  generateCard(dealerHand.getCards()[0])
   generateCard(dealerHand.getCards()[1]);
+
+  const table = document.querySelector(".table");
+  table.append(generateCard(dealerHand.getCards()[0]));
+  table.append(generateCard(dealerHand.getCards()[1]));
+
+  const user = document.createElement("section");
+  user.classList.add("dealer-hand");
+
+  const userHand = singleDeckGame.getUserHand();
+  
+  generateCard(userHand.getCards()[0])
+  generateCard(userHand.getCards()[1]);
+
+
+  table.append(generateCard(userHand.getCards()[0]));
+  table.append(generateCard(userHand.getCards()[1]));
+
+
+
   
   function generateCard(card) {
     const playingCard = document.createElement("section");
@@ -34,7 +51,8 @@ const {
     valueContainer.append(value);
     valueContainer.append(suit);
     playingCard.append(valueContainer);
-  
-    const table = document.querySelector(".table");
-    table.append(playingCard);
+ 
+    return playingCard
+    // const table = document.querySelector(".table");
+    // table.append(playingCard);
   }
