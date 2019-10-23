@@ -106,3 +106,30 @@ h1 {
 
 }
 
+.playing-card {
+    box-sizing:border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100px;
+    height: 140px;
+    margin: 5px;
+    border: solid ;
+    border-color: #000000;
+    padding: 10px;
+    border-radius: 10%;
+    box-shadow: 12px 12px 2px 1px rgba(4, 37, 17, 0.2);
+   }
+
+.dealer-hand,.user-hand{
+   
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border: 5px, solid ;
+    border-color: #000000;
+    padding: 20px;
+    border-radius: 1.0;
+    }
+
+
