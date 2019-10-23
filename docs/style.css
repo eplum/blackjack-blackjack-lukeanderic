@@ -1,58 +1,108 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html {
-    --dark: #011;
-    --green: green;
-    --light: #efefef;
-    --red: red;
-  
-    color: var(--dark);
-    font: 20px/1 sans-serif;
-  }
-  
-  .container {
-    margin: 0 auto;
-    max-width: 30rem;
-    width: 90%;
-  }
-  
-  .playing-card {
-    background-color: var(--light);
-    border-radius: 0.5rem;
-    display: flex;
-    height: 8rem;
-    margin: 0.5rem;
-    padding: 1rem;
-    width: 6rem;
-  }
-  
-  .table {
-    align-items: center;
-    background-color: var(--green);
-    display: flex;
-    justify-content: center;
-    height: 20rem;
-  }
-  
-  .value-container {
-    align-items: center;
-    border: 1px solid var(--red);
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    width: 100%;
-  }
-
-  .dealer-hand{
-      display: flex;
-    background-color : purple;
-  }
-
-  .user-hand{
-    display: flex;
-    background-color : orange;
+main {
+    display: grid;
+    grid-template-columns: 200px auto 150px;
+    height: 100%;
 }
+
+.actions-box {
+    border: 1px solid;
+    border-color: black;
+    background-color: red;
+    padding: 1rem;
+}
+
+.actions__round {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: black;
+    background-color: yellow;
+    margin: 1rem;
+}
+
+button {
+    margin: 1rem;
+}
+
+.deal-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightseagreen;
+    margin: 1rem;
+}
+
+.game {
+    display: grid;
+    grid-template-rows: 200px auto 200px;
+}
+
+.game-menu {
+    display: flex;
+    align-content: center;
+    padding: 1rem;
+    border: 1px solid;
+    border-color: black;
+}
+
+header {
+    display: grid;
+    grid-template-columns: auto 150px;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightgrey;
+
+}
+
+h1 {
+    display: grid;
+    align-self: center;
+    justify-self: center;
+}
+
+.left-sidebar {
+    height: 100%;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightcoral;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 1rem;
+    border: 1px solid;
+    border-color: black;
+}
+
+.right-sidebar {
+    height: 100%;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightcoral;
+}
+
+.pot {
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    padding: 2rem;
+    margin: 2rem;
+    border: 1px solid black;
+
+
+}
+
+.score-box {
+    border: 1px solid;
+    border-color: black;
+    background-color: red;
+    padding: 1rem;
+    
+
+}
+

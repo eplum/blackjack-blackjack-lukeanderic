@@ -4,26 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css">
+
     <title>Document</title>
 </head>
 <body>
-
-<div class="container">
-
-    <header>   
+    <header>
         <h1>Blackjack!!!</h1>
+        <section class="game-menu">
+            <div class="menu-buttons">
+                <button class="start-game">Start game</button>
+                <button class="quit-game">Quit</button>
+            </div>
+        </section>
     </header>
     <main>
-        <section class="table"> 
-            
-            
- 
+        <div class="left-sidebar">
+            <section class="score-box">
+                <div class="chip-count">Chip count:</div>
+                <div class="game-tally">
+                    <p class="win">Games won:</p>
+                    <p class="lose">Games lost:</p>
+                    <p class="push">Games pushed:</p>    
+                </div>
+            </section>
+        </div>
+        <section class="table">  
+            <div class="game">  
+                <section class="dealer-hand"></section> <!--wrapped in dealer-hand?-->
+                <section class="pot">pot</section>
+                <section class="user-hand"></section>  <!--wrapped in dealer-hand?-->
+            </div>
         </section>
+            <div class="right-sidebar">
+                <section class= "actions-box"> 
+                    <div class="actions__round">
+                        <button class="actions__hit">Hit</button>
+                        <button class="actions__stay">Stay</button>
+                        <button class="actions__double">Double</button>
+                    </div>
+                    <div class="deal-box">
+                        <button class="actions__deal">Deal</button>
+                    </div>
+                </section>
+            </div>
     </main>
-</div>
-   
-    <script src= "main.js"></script>
-
+    <script src= "./app.js"></script>
 </body>
 </html>
