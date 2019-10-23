@@ -46,3 +46,13 @@
     padding: 1rem;
     width: 100%;
   }
+
+  .dealer-hand{
+      display: flex;
+    background-color : purple;
+  }
+
+  .user-hand{
+    display: flex;
+    background-color : orange;
+}
