@@ -9,13 +9,17 @@ const Dom = require("./utils/Dom");
 
   const dealerHand = singleDeckGame.getDealerHand();
   
-  // dealerHand.foreach ()
-  // Dom.generateCard(dealerHand.getCards()[0])
-  // Dom.generateCard(dealerHand.getCards()[1]);
 
   const dealerCards = document.querySelector(".dealer-hand");
-  dealerCards.append(Dom.generateCard(dealerHand.getCards()[0]));
-  dealerCards.append(Dom.generateCard(dealerHand.getCards()[1]));
+  
+  dealerHand.getCards().forEach(card  => {
+
+    dealerCards.append(Dom.generateCard(card))
+
+  });
+
+  // dealerCards.append(Dom.generateCard(dealerHand.getCards()[0]));
+  // dealerCards.append(Dom.generateCard(dealerHand.getCards()[1]));
 
 
 
