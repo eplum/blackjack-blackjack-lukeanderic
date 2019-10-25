@@ -21,6 +21,15 @@ generateCard(card) {
  
     return playingCard
 
-  }
+  },
 
+  renderCards(cardArray,target) {
+    cardArray.forEach(card => {
+      target.append(this.generateCard(card));
+    });
+  },
+
+  renderHit(cardArray,target) {
+    target.append(this.generateCard(cardArray[cardArray.length - 1]));
+  }
 }
