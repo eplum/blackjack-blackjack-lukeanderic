@@ -21,6 +21,21 @@ generateCard(card) {
  
     return playingCard
 
-  }
+  },
 
+  renderCard(cardsArray, containerElement) {
+    cardsArray.forEach(card => {
+      containerElement.append(this.generateCard(card));
+    })
+ 
+  },
+
+  displayChips(singleDeckGame){
+    const chips = document.querySelector(".chips");
+    const span = document.createElement("span");
+      span.classList.add("chips");
+      chips.textContent = singleDeckGame.getUserChips();
+  },
+
+  
 }
