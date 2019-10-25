@@ -16,21 +16,49 @@ singleDeckGame.deal();
   Dom.renderCards(userHand.getCards(),userCards);
 
   // respond to hit button
+  const hitButton = document.querySelector(".actions__hit");
+      hitButton.addEventListener("click", () => {
+      singleDeckGame.hitUser();
+      Dom.renderHit(userHand.getCards(),userCards);
+      singleDeckGame.evaluateUser();  // need to decide what to do
 
-  singleDeckGame.hitUser();
-  Dom.renderHit(userHand.getCards(),userCards);
-  singleDeckGame.evaluateUser();  // need to decide what to do
-  
+      console.log("hit button")
+      })
+
+   // respond to double button
+   const doubleButton = document.querySelector(".actions__double");
+      doubleButton.addEventListener("click", () => {
+      singleDeckGame.hitUser();
+      Dom.renderHit(userHand.getCards(),userCards);
+      // double bet
+      // call stay
+      singleDeckGame.evaluateUser();  // need to decide what to do
+      console.log("double button")
+      })
+
+     // respond to hit button
+  const stayButton = document.querySelector(".actions__hit");
+      stayButton.addEventListener("click", () => {
+      
+      singleDeckGame.evaluateUser();  // need to decide what to do
+
+      // check results 
+
+      // get dealers results
+
+      console.log("stay button")
+      })
+
   // hit dealer
 
-  singleDeckGame.hitDealer();
-  Dom.renderHit(dealerHand.getCards(),dealerCards);
-  singleDeckGame.evaluateDealer(); // need to decide what to do
+  // singleDeckGame.hitDealer();
+  // Dom.renderHit(dealerHand.getCards(),dealerCards);
+  // singleDeckGame.evaluateDealer(); // need to decide what to do
 
 
 
 // get and process ante
-
+ 
 // deal cards
 
 // evaluate for blackjack, if so skip playing loop
@@ -40,6 +68,7 @@ singleDeckGame.deal();
 // respond to hit, stay, double
 
 // evaluate for bust
+
 
 // dealer needs hit?
 

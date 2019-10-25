@@ -20,8 +20,8 @@ generateCard(card) {
     playingCard.append(valueContainer);
  
     return playingCard
+  }, 
 
-  },
 
   renderCards(cardArray,target) {
     cardArray.forEach(card => {
