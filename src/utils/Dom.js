@@ -23,13 +23,27 @@ generateCard(card) {
   }, 
 
 
-  renderCards(cardArray,target) {
+  renderCards(cardArray,containerElement) {
     cardArray.forEach(card => {
-      target.append(this.generateCard(card));
+      containerElement.append(this.generateCard(card));
     });
   },
 
-  renderHit(cardArray,target) {
-    target.append(this.generateCard(cardArray[cardArray.length - 1]));
+  renderHit(cardArray,containerElement) {
+    containerElement.append(this.generateCard(cardArray[cardArray.length - 1]));
+  },
+
+  displayChips(singleDeckGame){
+    const chips = document.querySelector(".chips");
+    const span = document.createElement("span");
+      span.classList.add("chips");
+      chips.textContent = singleDeckGame.getUserChips();
+  },
+  
+  disableActionButtons(toggle) {
+    const actionButtons = document.querySelectorAll("div.actions__round > button");
+    actionButtons.forEach(button => button.setAttribute("disabled", toggle));
   }
+
+  
 }

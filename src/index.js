@@ -1,13 +1,13 @@
 const {
     default: { singleDeckGame }
   } = require("blackjack-dealer-logic");
-
 const Dom = require("./utils/Dom");
+
 
 singleDeckGame.deal();
 
   let dealerHand = singleDeckGame.getDealerHand();
-  const dealerCards = document.querySelector(".dealer-hand");
+  const dealerCards = document.querySelector(".dealer-hand"); 
   Dom.renderCards(dealerHand.getCards(),dealerCards);
 
 
@@ -30,51 +30,60 @@ singleDeckGame.deal();
       doubleButton.addEventListener("click", () => {
       singleDeckGame.hitUser();
       Dom.renderHit(userHand.getCards(),userCards);
-      // double bet
-      // call stay
-      singleDeckGame.evaluateUser();  // need to decide what to do
-      console.log("double button")
-      })
 
-     // respond to hit button
-  const stayButton = document.querySelector(".actions__hit");
-      stayButton.addEventListener("click", () => {
+      // double bet
       
       singleDeckGame.evaluateUser();  // need to decide what to do
+      
+      Dom.disableActionButtons("true");
 
-      // check results 
-
-      // get dealers results
-
-      console.log("stay button")
       })
 
-  // hit dealer
+  
+  const stayButton = document.querySelector(".actions__stay");
+      stayButton.addEventListener("click", () => {
+      console.log("stay");
+      singleDeckGame.evaluateUser();
+      
+      Dom.disableActionButtons("true");
 
-  // singleDeckGame.hitDealer();
-  // Dom.renderHit(dealerHand.getCards(),dealerCards);
-  // singleDeckGame.evaluateDealer(); // need to decide what to do
+          
+      })
+
+//removes all cards
+
+  const dealButton = document.querySelector(".actions__deal");
+  dealButton.addEventListener("click", () => {
+      console.log("deal")
+      const dealerCards = document.querySelector(".dealer-hand");
+      singleDeckGame.deal();
+
+      dealerCards.append(Dom.generateCard(dealerHand.getCards()[0]));
+      dealerCards.append(Dom.generateCard(dealerHand.getCards()[1]));
+      const userCards = document.querySelector(".user-hand");
+
+      userCards.append(Dom.generateCard(userHand.getCards()[0]));
+      userCards.append(Dom.generateCard(userHand.getCards()[1]));
 
 
+      
+  })
 
-// get and process ante
- 
-// deal cards
+  const newGameButton = document.querySelector(".start-game");
+      newGameButton.addEventListener("click", () => {
+      console.log("newGame")
+      dealerCards.remove()
+      userCards.remove()
+      singleDeckGame.deal();
+  })
 
-// evaluate for blackjack, if so skip playing loop
+  const quitButton = document.querySelector(".quit-game");
+      quitButton.addEventListener("click", () => {
+      console.log("quit")
+      dealerCards.remove()
+      userCards.remove()
 
-// begin loop to play hand
+  })
 
-// respond to hit, stay, double
-
-// evaluate for bust
-
-
-// dealer needs hit?
-
-// if so, evaluate for bust
-
-// if both still playing, loop again
-
-// else adjust chip count & tally result
+Dom.displayChips(singleDeckGame)
 
