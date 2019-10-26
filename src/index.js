@@ -3,17 +3,36 @@ const {
   } = require("blackjack-dealer-logic");
 const Dom = require("./utils/Dom");
 
+const userChips = document.querySelector(".chips");
+const userAnte = prompt(
+  `
+  Place your bet?
+  Available chips: ${singleDeckGame.getUserChips()}
+  `
+);
+
+userChips.textContent = userAnte;
+singleDeckGame.receiveAnte(userAnte);
+
+Dom.displayChips(singleDeckGame);
+Dom.displayWager(singleDeckGame);
 
 singleDeckGame.deal();
 
   let dealerHand = singleDeckGame.getDealerHand();
   const dealerCards = document.querySelector(".dealer-hand"); 
+  Dom.hideDealerHoleCard(dealerHand.getCards());
   Dom.renderCards(dealerHand.getCards(),dealerCards);
 
 
   let userHand = singleDeckGame.getUserHand(); 
   const userCards = document.querySelector(".user-hand");
   Dom.renderCards(userHand.getCards(),userCards);
+
+
+  if(!(singleDeckGame.isUserPlaying() && singleDeckGame.isDealerPlaying())) {resolveGame()};
+
+
 
   // respond to hit button
   const hitButton = document.querySelector(".actions__hit");
@@ -28,14 +47,13 @@ singleDeckGame.deal();
    // respond to double button
    const doubleButton = document.querySelector(".actions__double");
       doubleButton.addEventListener("click", () => {
-      singleDeckGame.hitUser();
+      singleDeckGame.doubleUser();
       Dom.renderHit(userHand.getCards(),userCards);
 
       // double bet
-      
-      singleDeckGame.evaluateUser();  // need to decide what to do
-      
-      Dom.disableActionButtons("true");
+    
+      Dom.displayChips(singleDeckGame);
+      Dom.displayWager(singleDeckGame);
 
       })
 
@@ -44,10 +62,15 @@ singleDeckGame.deal();
       stayButton.addEventListener("click", () => {
       console.log("stay");
       singleDeckGame.evaluateUser();
-      
       Dom.disableActionButtons("true");
 
-          
+          // resolve game
+
+          // finish dealer play
+
+          // determine outcome
+
+          // adjust chip count
       })
 
 //removes all cards
@@ -85,5 +108,7 @@ singleDeckGame.deal();
 
   })
 
-Dom.displayChips(singleDeckGame)
+Dom.displayChips(singleDeckGame);
+Dom.displayWager(singleDeckGame);
 
+// function resolveGame(){}

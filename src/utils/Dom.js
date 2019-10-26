@@ -39,11 +39,21 @@ generateCard(card) {
       span.classList.add("chips");
       chips.textContent = singleDeckGame.getUserChips();
   },
-  
+
+  displayWager(singleDeckGame){
+    const wager = document.querySelector(".pot");
+    const span = document.createElement("span");
+      span.classList.add("wager");
+      wager.textContent = singleDeckGame.getAnte();
+  },
   disableActionButtons(toggle) {
     const actionButtons = document.querySelectorAll("div.actions__round > button");
     actionButtons.forEach(button => button.setAttribute("disabled", toggle));
-  }
+  },
 
+  hideDealerHoleCard(cardArray){
+    cardArray[1].value = "";
+    cardArray[1].suit = "";
+  }
   
 }
