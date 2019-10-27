@@ -40,22 +40,22 @@ singleDeckGame.deal();
       })
 
    
-  const stayButton = document.querySelector(".actions__stay");
+  // const stayButton = document.querySelector(".actions__stay");
 
-  //this may get wiped out in Eric's latest push
+  // //this may get wiped out in Eric's latest push
   
-      stayButton.addEventListener("click", () => {
-      console.log("stay");
-      Dom.disableActionButtons("true");
+  //     stayButton.addEventListener("click", () => {
+  //     console.log("stay");
+  //     Dom.disableActionButtons("true");
       
-      singleDeckGame.settleDealerHand();
-      const finalScore = singleDeckGame.outcome();
-      const dealer = singleDeckGame.evaluateDealer();
-      const user = singleDeckGame.evaluateUser();
-      if(dealer > user)
+  //     singleDeckGame.settleDealerHand();
+  //     const finalScore = singleDeckGame.outcome();
+  //     const dealer = singleDeckGame.evaluateDealer();
+  //     const user = singleDeckGame.evaluateUser();
+  //     if(dealer > user)
 
           
-      })
+  //     })
 
 //removes all cards
 
