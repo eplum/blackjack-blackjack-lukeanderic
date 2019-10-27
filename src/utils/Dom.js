@@ -132,8 +132,10 @@ generateCard(card) {
               console.log("win")
                ConfirmMessage = "You won!  ヽ(•‿•)ノ   Play another hand?";
                singleDeckGame.userWin()
-               Counter.counter()
 
+               
+               console.log(Counter.counter("win"));
+              
             break;
     
             case  Result.LOSS:
