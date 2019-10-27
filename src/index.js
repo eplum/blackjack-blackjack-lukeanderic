@@ -1,5 +1,5 @@
 const {
-    default: { singleDeckGame }
+    default: { singleDeckGame, Result }
   } = require("blackjack-dealer-logic");
 const Dom = require("./utils/Dom");
 
@@ -17,21 +17,24 @@ singleDeckGame.receiveAnte(userAnte);
 Dom.displayChips(singleDeckGame);
 Dom.displayWager(singleDeckGame);
 
+
+
 singleDeckGame.deal();
 
   let dealerHand = singleDeckGame.getDealerHand();
+  console.log(dealerHand.getCards());
   const dealerCards = document.querySelector(".dealer-hand"); 
-  Dom.hideDealerHoleCard(dealerHand.getCards());
-  Dom.renderCards(dealerHand.getCards(),dealerCards);
-
+  Dom.renderSingleCard(dealerHand.getCards()[0],dealerCards);
+  Dom.renderHoleCard(dealerCards);
+  console.log(dealerHand.getCards());
 
   let userHand = singleDeckGame.getUserHand(); 
   const userCards = document.querySelector(".user-hand");
   Dom.renderCards(userHand.getCards(),userCards);
 
 
-  if(!(singleDeckGame.isUserPlaying() && singleDeckGame.isDealerPlaying())) {resolveGame()};
 
+  if(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()) resolveGame();
 
 
   // respond to hit button
@@ -39,9 +42,11 @@ singleDeckGame.deal();
       hitButton.addEventListener("click", () => {
       singleDeckGame.hitUser();
       Dom.renderHit(userHand.getCards(),userCards);
-      singleDeckGame.evaluateUser();  // need to decide what to do
-
-      console.log("hit button")
+      singleDeckGame.evaluateUser();
+      if(singleDeckGame.isUserBust()) {
+        console.log("user bust");
+        resolveGame();
+        }
       })
 
    // respond to double button
@@ -49,12 +54,9 @@ singleDeckGame.deal();
       doubleButton.addEventListener("click", () => {
       singleDeckGame.doubleUser();
       Dom.renderHit(userHand.getCards(),userCards);
-
-      // double bet
-    
       Dom.displayChips(singleDeckGame);
       Dom.displayWager(singleDeckGame);
-
+      resolveGame();
       })
 
   
@@ -64,13 +66,8 @@ singleDeckGame.deal();
       singleDeckGame.evaluateUser();
       Dom.disableActionButtons("true");
 
-          // resolve game
+      resolveGame();
 
-          // finish dealer play
-
-          // determine outcome
-
-          // adjust chip count
       })
 
 //removes all cards
@@ -111,4 +108,46 @@ singleDeckGame.deal();
 Dom.displayChips(singleDeckGame);
 Dom.displayWager(singleDeckGame);
 
-// function resolveGame(){}
+function resolveGame(){
+
+  if(!(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()))
+  {
+    singleDeckGame.settleDealerHand()
+    let dealerHand = singleDeckGame.getDealerHand();
+    const dealerCards = document.querySelector(".dealer-hand"); 
+    dealerCards.innerHTML = "";
+    Dom.renderCards(dealerHand.getCards(), dealerCards);
+    console.log(dealerHand.getCards())
+  }
+  singleDeckGame.evaluateUser();
+  singleDeckGame.evaluateDealer();
+
+
+    switch (singleDeckGame.outcome()){
+
+        case Result.WIN:
+          console.log("win")
+        break;
+
+        case  Result.LOSS:
+            console.log("loss")
+        break;
+        
+        case  Result.PUSH:
+            console.log("push")
+        break;
+
+        default:
+            console.log("fail")
+        break;
+      
+
+    }
+
+    // prepare to restart
+
+    // dealerCards.innerHTML = "";
+    // userCards.innerHTML = "";
+
+   // Dom.displayChips(singleDeckGame);
+  }

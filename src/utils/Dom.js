@@ -22,6 +22,29 @@ generateCard(card) {
     return playingCard
   }, 
 
+  generateHoleCard() {
+    const playingCard = document.createElement("section");
+    playingCard.classList.add("playing-card");
+  
+    const valueContainer = document.createElement("section");
+    valueContainer.classList.add("value-container");
+    const value = document.createElement("span");
+    value.classList.add("value");
+    value.textContent = "";
+  
+    const suit = document.createElement("span");
+    suit.classList.add("suit");
+    suit.textContent = "";
+  
+    valueContainer.append(value);
+    valueContainer.append(suit);
+    playingCard.append(valueContainer);
+
+    console.log(playingCard);
+ 
+    return playingCard
+  }, 
+
 
   renderCards(cardArray,containerElement) {
     cardArray.forEach(card => {
@@ -31,6 +54,11 @@ generateCard(card) {
 
   renderHit(cardArray,containerElement) {
     containerElement.append(this.generateCard(cardArray[cardArray.length - 1]));
+  },
+
+  renderSingleCard(card,containerElement) {
+    
+    containerElement.append(this.generateCard(card));
   },
 
   displayChips(singleDeckGame){
@@ -51,9 +79,11 @@ generateCard(card) {
     actionButtons.forEach(button => button.setAttribute("disabled", toggle));
   },
 
-  hideDealerHoleCard(cardArray){
-    cardArray[1].value = "";
-    cardArray[1].suit = "";
+  renderHoleCard(containerElement) {
+    
+    containerElement.append(this.generateHoleCard());
+
+
   }
   
 }
