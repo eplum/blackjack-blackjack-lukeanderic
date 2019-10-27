@@ -1,3 +1,5 @@
+const Counter = require("./Counter");
+
 module.exports = {
 
 generateCard(card) {
@@ -130,6 +132,8 @@ generateCard(card) {
               console.log("win")
                ConfirmMessage = "You won!  ヽ(•‿•)ノ   Play another hand?";
                singleDeckGame.userWin()
+               Counter.counter()
+
             break;
     
             case  Result.LOSS:
@@ -184,5 +188,6 @@ generateCard(card) {
         this.displayChips(singleDeckGame);
         this.displayWager(singleDeckGame);
         this.stayButtonEvent(singleDeckGame, Result);
-      }
+      },
+
 }
