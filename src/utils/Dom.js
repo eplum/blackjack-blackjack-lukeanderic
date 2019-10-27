@@ -86,6 +86,103 @@ generateCard(card) {
     containerElement.append(this.generateHoleCard());
 
 
-  }
-  
+  },
+
+  hitButtonEvent(singleDeckGame,Result){
+    singleDeckGame.hitUser();
+    const userHand = singleDeckGame.getUserHand();
+    const userCards = document.querySelector(".user-hand");
+    this.renderHit(userHand.getCards(),userCards);
+    console.log(singleDeckGame.evaluateUser());
+    singleDeckGame.evaluateUser()
+    if(singleDeckGame.isUserBust()) {
+      console.log("user bust");
+      this.resolveGame(singleDeckGame,Result);
+      this.processOutcome(singleDeckGame,Result);
+      }
+    },
+
+    resolveGame(singleDeckGame,Result){
+
+      if(singleDeckGame.isUserBust()){
+        // do nothing
+      }
+    
+      else
+    
+      {
+        console.log("settle dealer hand");
+        singleDeckGame.settleDealerHand();
+        const dealerHand = singleDeckGame.getDealerHand();
+        const dealerCards = document.querySelector(".dealer-hand"); 
+        dealerCards.innerHTML = "";
+        console.log(dealerHand.getCards())
+        this.renderCards(dealerHand.getCards(), dealerCards);      
+      }
+      
+    },
+
+    processOutcome(singleDeckGame,Result){
+        let ConfirmMessage = "";
+        switch (singleDeckGame.outcome()){
+    
+            case Result.WIN:
+              console.log("win")
+               ConfirmMessage = "You won!  ヽ(•‿•)ノ   Play another hand?";
+               singleDeckGame.userWin()
+            break;
+    
+            case  Result.LOSS:
+                console.log("loss")
+                ConfirmMessage = "You lost.   (︶︿︶)   Play another hand?";
+               
+            break;
+            
+            case  Result.PUSH:
+                console.log("push")
+                ConfirmMessage = "It is a push.   Play another hand?";
+                singleDeckGame.pushHand();
+            break;
+    
+            default:
+                console.log("error")
+            break;
+          
+            
+        }
+        
+        this.displayChips(singleDeckGame);
+        singleDeckGame.resetAnte();
+        this.displayWager(singleDeckGame);
+    
+        const userDecision = confirm(ConfirmMessage);
+    
+        console.log(userDecision)
+    
+        // dealerCards.innerHTML = "";
+        // userCards.innerHTML = "";
+    
+        // prepare to restart
+    
+        // dealerCards.innerHTML = "";
+        // userCards.innerHTML = "";
+    
+       // Dom.displayChips(singleDeckGame);
+      },
+      
+      stayButtonEvent(singleDeckGame, Result) {
+        console.log("stay");
+        this.disableActionButtons("true");
+        this.resolveGame(singleDeckGame, Result);
+        this.processOutcome(singleDeckGame,Result);
+      },
+      doubleButtonEvent(singleDeckGame, Result) {
+        singleDeckGame.doubleUser();
+        const userHand = singleDeckGame.getUserHand();
+        const userCards = document.querySelector(".user-hand");
+        this.renderHit(userHand.getCards(), userCards);
+        this.displayChips(singleDeckGame);
+        this.displayWager(singleDeckGame);
+        this.stayButtonEvent(singleDeckGame, Result);
+      }
 }
