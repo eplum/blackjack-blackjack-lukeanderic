@@ -39,13 +39,20 @@ singleDeckGame.deal();
 
       })
 
-  
+   
   const stayButton = document.querySelector(".actions__stay");
+
+  //this may get wiped out in Eric's latest push
+  
       stayButton.addEventListener("click", () => {
       console.log("stay");
-      singleDeckGame.evaluateUser();
-      
       Dom.disableActionButtons("true");
+      
+      singleDeckGame.settleDealerHand();
+      const finalScore = singleDeckGame.outcome();
+      const dealer = singleDeckGame.evaluateDealer();
+      const user = singleDeckGame.evaluateUser();
+      if(dealer > user)
 
           
       })
