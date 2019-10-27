@@ -65,8 +65,8 @@ generateCard(card) {
 
   displayChips(singleDeckGame){
     const chips = document.querySelector(".chips");
-    const span = document.createElement("span");
-      span.classList.add("chips");
+    // const span = document.createElement("span");
+    //   span.classList.add("chips");
       chips.innerHTML = "";
       chips.textContent = singleDeckGame.getUserChips();
   },
@@ -133,21 +133,26 @@ generateCard(card) {
                ConfirmMessage = "You won!  ヽ(•‿•)ノ   Play another hand?";
                singleDeckGame.userWin()
 
+               this.displayCounts(singleDeckGame,"win",".win-count");
                
-               console.log(Counter.counter("win"));
               
             break;
     
             case  Result.LOSS:
                 console.log("loss")
                 ConfirmMessage = "You lost.   (︶︿︶)   Play another hand?";
-               
+
+                this.displayCounts(singleDeckGame,"loss",".loss-count");
+
             break;
             
             case  Result.PUSH:
                 console.log("push")
                 ConfirmMessage = "It is a push.   Play another hand?";
                 singleDeckGame.pushHand();
+                this.displayCounts(singleDeckGame,"push",".push-count")
+
+
             break;
     
             default:
@@ -192,4 +197,9 @@ generateCard(card) {
         this.stayButtonEvent(singleDeckGame, Result);
       },
 
+      displayCounts(singleDeckGame,result,container){
+        const count = document.querySelector(container);
+        count.innerHTML = "";
+        count.textContent = Counter.counter(result);
+      }
 }
