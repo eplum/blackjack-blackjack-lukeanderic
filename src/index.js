@@ -34,7 +34,10 @@ singleDeckGame.deal();
 
 
 
-  if(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()) resolveGame();
+  if(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust())
+   {
+     resolveGame();
+    }
 
 
   // respond to hit button
@@ -42,7 +45,9 @@ singleDeckGame.deal();
       hitButton.addEventListener("click", () => {
       singleDeckGame.hitUser();
       Dom.renderHit(userHand.getCards(),userCards);
-      singleDeckGame.evaluateUser();
+
+      console.log(singleDeckGame.evaluateUser());
+
       if(singleDeckGame.isUserBust()) {
         console.log("user bust");
         resolveGame();
@@ -63,7 +68,6 @@ singleDeckGame.deal();
   const stayButton = document.querySelector(".actions__stay");
       stayButton.addEventListener("click", () => {
       console.log("stay");
-      singleDeckGame.evaluateUser();
       Dom.disableActionButtons("true");
 
       resolveGame();
@@ -72,77 +76,95 @@ singleDeckGame.deal();
 
 //removes all cards
 
-  const dealButton = document.querySelector(".actions__deal");
-  dealButton.addEventListener("click", () => {
-      console.log("deal")
-      const dealerCards = document.querySelector(".dealer-hand");
-      singleDeckGame.deal();
+  // const dealButton = document.querySelector(".actions__deal");
+  // dealButton.addEventListener("click", () => {
+  //     console.log("deal")
+  //     const dealerCards = document.querySelector(".dealer-hand");
+  //     singleDeckGame.deal();
 
-      dealerCards.append(Dom.generateCard(dealerHand.getCards()[0]));
-      dealerCards.append(Dom.generateCard(dealerHand.getCards()[1]));
-      const userCards = document.querySelector(".user-hand");
+  //     dealerCards.append(Dom.generateCard(dealerHand.getCards()[0]));
+  //     dealerCards.append(Dom.generateCard(dealerHand.getCards()[1]));
+  //     const userCards = document.querySelector(".user-hand");
 
-      userCards.append(Dom.generateCard(userHand.getCards()[0]));
-      userCards.append(Dom.generateCard(userHand.getCards()[1]));
-
-
+  //     userCards.append(Dom.generateCard(userHand.getCards()[0]));
+  //     userCards.append(Dom.generateCard(userHand.getCards()[1]));
       
-  })
+  // })
 
-  const newGameButton = document.querySelector(".start-game");
-      newGameButton.addEventListener("click", () => {
-      console.log("newGame")
-      dealerCards.remove()
-      userCards.remove()
-      singleDeckGame.deal();
-  })
+  // const newGameButton = document.querySelector(".start-game");
+  //     newGameButton.addEventListener("click", () => {
+  //     console.log("newGame")
+  //     dealerCards.remove()
+  //     userCards.remove()
+  //     singleDeckGame.deal();
+  // })
 
-  const quitButton = document.querySelector(".quit-game");
-      quitButton.addEventListener("click", () => {
-      console.log("quit")
-      dealerCards.remove()
-      userCards.remove()
+  // const quitButton = document.querySelector(".quit-game");
+  //     quitButton.addEventListener("click", () => {
+  //     console.log("quit")
+  //     dealerCards.remove()
+  //     userCards.remove()
 
-  })
-
-Dom.displayChips(singleDeckGame);
-Dom.displayWager(singleDeckGame);
+  // })
 
 function resolveGame(){
 
-  if(!(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()))
+  if(singleDeckGame.isUserBust()){
+    // do nothing
+  }
+
+  else
+
   {
-    singleDeckGame.settleDealerHand()
-    let dealerHand = singleDeckGame.getDealerHand();
+    console.log("settle dealer hand")
+    singleDeckGame.settleDealerHand();
+    const dealerHand = singleDeckGame.getDealerHand();
     const dealerCards = document.querySelector(".dealer-hand"); 
     dealerCards.innerHTML = "";
-    Dom.renderCards(dealerHand.getCards(), dealerCards);
     console.log(dealerHand.getCards())
+    Dom.renderCards(dealerHand.getCards(), dealerCards);
+    
   }
-  singleDeckGame.evaluateUser();
-  singleDeckGame.evaluateDealer();
 
-
+    let ConfirmMessage = "";
     switch (singleDeckGame.outcome()){
 
         case Result.WIN:
           console.log("win")
+           ConfirmMessage = "You won!  ヽ(•‿•)ノ/n/nPlay another hand?";
+           singleDeckGame.userWin()
         break;
 
         case  Result.LOSS:
             console.log("loss")
+            ConfirmMessage = "You lost.  (⌣́_⌣̀) /n/nPlay another hand?";
+           
         break;
         
         case  Result.PUSH:
             console.log("push")
+            ConfirmMessage = "It is a push/n/nPlay another hand?";
+            singleDeckGame.pushHand();
         break;
 
         default:
-            console.log("fail")
+            console.log("error")
         break;
       
-
+        
     }
+
+    Dom.displayChips(singleDeckGame);
+    singleDeckGame.resetAnte();
+    Dom.displayWager(singleDeckGame);
+    
+
+    const userDecision = confirm(ConfirmMessage);
+
+    console.log(userDecision)
+
+    // dealerCards.innerHTML = "";
+    // userCards.innerHTML = "";
 
     // prepare to restart
 

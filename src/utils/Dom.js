@@ -65,6 +65,7 @@ generateCard(card) {
     const chips = document.querySelector(".chips");
     const span = document.createElement("span");
       span.classList.add("chips");
+      chips.innerHTML = "";
       chips.textContent = singleDeckGame.getUserChips();
   },
 
@@ -72,6 +73,7 @@ generateCard(card) {
     const wager = document.querySelector(".pot");
     const span = document.createElement("span");
       span.classList.add("wager");
+      wager.innerHTML = "";
       wager.textContent = singleDeckGame.getAnte();
   },
   disableActionButtons(toggle) {
