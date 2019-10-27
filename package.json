@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --content-base docs/ --open --hot"
+    "start": "webpack-dev-server --mode development --content-base docs/ --open --hot",
+    "test": "jest --watchAll --colors"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,14 @@
     "yarn": "^1.19.1"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": []
 }
