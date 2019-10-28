@@ -65,16 +65,16 @@ generateCard(card) {
 
   displayChips(singleDeckGame){
     const chips = document.querySelector(".chips");
-    // const span = document.createElement("span");
-    //   span.classList.add("chips");
+    const span = document.createElement("span");
+      span.classList.add("chips");
       chips.innerHTML = "";
       chips.textContent = singleDeckGame.getUserChips();
   },
 
   displayWager(singleDeckGame){
     const wager = document.querySelector(".pot");
-    const span = document.createElement("span");
-      span.classList.add("wager");
+    // const span = document.createElement("span");
+    //   span.classList.add("wager");
       wager.innerHTML = "";
       wager.textContent = singleDeckGame.getAnte();
   },
@@ -130,7 +130,10 @@ generateCard(card) {
     
             case Result.WIN:
               console.log("win")
-               ConfirmMessage = "You won!  ヽ(•‿•)ノ   Play another hand?";
+               ConfirmMessage = `You won!  ヽ(•‿•)ノ 
+               
+               Play another hand?`;
+
                singleDeckGame.userWin()
 
                this.displayCounts(singleDeckGame,"win",".win-count");
@@ -140,7 +143,9 @@ generateCard(card) {
     
             case  Result.LOSS:
                 console.log("loss")
-                ConfirmMessage = "You lost.   (︶︿︶)   Play another hand?";
+                ConfirmMessage = `You lost.   (︶︿︶)
+                
+                Play another hand?`;
 
                 this.displayCounts(singleDeckGame,"loss",".loss-count");
 
@@ -148,7 +153,9 @@ generateCard(card) {
             
             case  Result.PUSH:
                 console.log("push")
-                ConfirmMessage = "It is a push.   Play another hand?";
+                ConfirmMessage = `It is a push.
+                
+                Play another hand?`;
                 singleDeckGame.pushHand();
                 this.displayCounts(singleDeckGame,"push",".push-count")
 
@@ -183,7 +190,8 @@ generateCard(card) {
       
       stayButtonEvent(singleDeckGame, Result) {
         console.log("stay");
-        this.disableActionButtons("true");
+        //this.disableActionButtons("true");  does not re-enable, if used
+
         this.resolveGame(singleDeckGame, Result);
         this.processOutcome(singleDeckGame,Result);
       },
@@ -201,5 +209,44 @@ generateCard(card) {
         const count = document.querySelector(container);
         count.innerHTML = "";
         count.textContent = Counter.counter(result);
+      },
+      requestAnte(singleDeckGame) {
+        const userChips = document.querySelector(".chips");
+        const userAnte = prompt(`
+        Place your bet?
+        Available chips: ${singleDeckGame.getUserChips()}
+        `);
+        userChips.textContent = userAnte;
+        singleDeckGame.receiveAnte(userAnte);
+        this.displayChips(singleDeckGame);
+        this.displayWager(singleDeckGame);
+      },
+      startAHand(singleDeckGame) {
+
+        const dealerCards = document.querySelector(".dealer-hand");
+        dealerCards.innerHTML = "";
+
+        const userCards = document.querySelector(".user-hand");
+        userCards.innerHTML = "";
+
+       // this.disableActionButtons("false");  does not re-enable
+
+        this.requestAnte(singleDeckGame);
+
+        singleDeckGame.deal();
+        let dealerHand = singleDeckGame.getDealerHand();
+        
+       // const dealerCards = document.querySelector(".dealer-hand");
+        this.renderSingleCard(dealerHand.getCards()[0], dealerCards);
+        this.renderHoleCard(dealerCards);
+      
+        let userHand = singleDeckGame.getUserHand();
+       // const userCards = document.querySelector(".user-hand");
+        this.renderCards(userHand.getCards(), userCards);
+
+        // if (singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()) {
+
+        //   this.stayButtonEvent(singleDeckGame);
+        // }
       }
 }

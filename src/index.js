@@ -3,41 +3,8 @@ const {
   } = require("blackjack-dealer-logic");
 const Dom = require("./utils/Dom");
 
-const userChips = document.querySelector(".chips");
-const userAnte = prompt(
-  `
-  Place your bet?
-  Available chips: ${singleDeckGame.getUserChips()}
-  `
-);
 
-userChips.textContent = userAnte;
-singleDeckGame.receiveAnte(userAnte);
-
-Dom.displayChips(singleDeckGame);
-Dom.displayWager(singleDeckGame);
-
-
-
-  singleDeckGame.deal();
-
-  let dealerHand = singleDeckGame.getDealerHand();
-  console.log(dealerHand.getCards());
-  const dealerCards = document.querySelector(".dealer-hand"); 
-  Dom.renderSingleCard(dealerHand.getCards()[0],dealerCards);
-  Dom.renderHoleCard(dealerCards);
-  console.log(dealerHand.getCards());
-
-  let userHand = singleDeckGame.getUserHand(); 
-  const userCards = document.querySelector(".user-hand");
-  Dom.renderCards(userHand.getCards(),userCards);
-
-
-
-  if(singleDeckGame.isUserBust() || singleDeckGame.isDealerBust())
-   {
-    Dom.stayButtonEvent(singleDeckGame, Result)
-    }
+Dom.startAHand(singleDeckGame,Result);
 
 
   // handle hit button
@@ -63,6 +30,10 @@ Dom.displayWager(singleDeckGame);
 
 
 
+
+
+
+
 //removes all cards
 
   // const dealButton = document.querySelector(".actions__deal");
@@ -80,13 +51,13 @@ Dom.displayWager(singleDeckGame);
       
   // })
 
-  // const newGameButton = document.querySelector(".start-game");
-  //     newGameButton.addEventListener("click", () => {
-  //     console.log("newGame")
-  //     dealerCards.remove()
-  //     userCards.remove()
-  //     singleDeckGame.deal();
-  // })
+  const newGameButton = document.querySelector(".start-game");
+      newGameButton.addEventListener("click", () =>  {
+
+
+        Dom.startAHand(singleDeckGame)
+
+      })
 
   // const quitButton = document.querySelector(".quit-game");
   //     quitButton.addEventListener("click", () => {
@@ -95,5 +66,4 @@ Dom.displayWager(singleDeckGame);
   //     userCards.remove()
 
   // })
-
 
