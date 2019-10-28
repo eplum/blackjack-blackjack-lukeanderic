@@ -65,16 +65,12 @@ generateCard(card) {
 
   displayChips(singleDeckGame){
     const chips = document.querySelector(".chips");
-    const span = document.createElement("span");
-      span.classList.add("chips");
       chips.innerHTML = "";
       chips.textContent = singleDeckGame.getUserChips();
   },
 
   displayWager(singleDeckGame){
     const wager = document.querySelector(".pot");
-    // const span = document.createElement("span");
-    //   span.classList.add("wager");
       wager.innerHTML = "";
       wager.textContent = singleDeckGame.getAnte();
   },
@@ -87,19 +83,20 @@ generateCard(card) {
     
     containerElement.append(this.generateHoleCard());
 
-
   },
 
   hitButtonEvent(singleDeckGame,Result){
     singleDeckGame.hitUser();
+    singleDeckGame.evaluateUser();
     const userHand = singleDeckGame.getUserHand();
     const userCards = document.querySelector(".user-hand");
     this.renderHit(userHand.getCards(),userCards);
     console.log(singleDeckGame.evaluateUser());
     singleDeckGame.evaluateUser()
+
     if(singleDeckGame.isUserBust()) {
       console.log("user bust");
-      this.resolveGame(singleDeckGame,Result);
+      singleDeckGame.evaluateDealer();
       this.processOutcome(singleDeckGame,Result);
       }
     },
@@ -115,6 +112,8 @@ generateCard(card) {
       {
         console.log("settle dealer hand");
         singleDeckGame.settleDealerHand();
+        singleDeckGame.evaluateDealer();
+
         const dealerHand = singleDeckGame.getDealerHand();
         const dealerCards = document.querySelector(".dealer-hand"); 
         dealerCards.innerHTML = "";
@@ -177,19 +176,13 @@ generateCard(card) {
     
         console.log(userDecision)
     
-        // dealerCards.innerHTML = "";
-        // userCards.innerHTML = "";
-    
-        // prepare to restart
-    
-        // dealerCards.innerHTML = "";
-        // userCards.innerHTML = "";
-    
-       // Dom.displayChips(singleDeckGame);
       },
       
       stayButtonEvent(singleDeckGame, Result) {
         console.log("stay");
+        singleDeckGame.standUser();
+        singleDeckGame.evaluateUser();
+        singleDeckGame.evaluateDealer();
         //this.disableActionButtons("true");  does not re-enable, if used
 
         this.resolveGame(singleDeckGame, Result);
@@ -197,6 +190,7 @@ generateCard(card) {
       },
       doubleButtonEvent(singleDeckGame, Result) {
         singleDeckGame.doubleUser();
+        singleDeckGame.evaluateUser();
         const userHand = singleDeckGame.getUserHand();
         const userCards = document.querySelector(".user-hand");
         this.renderHit(userHand.getCards(), userCards);
@@ -232,21 +226,28 @@ generateCard(card) {
        // this.disableActionButtons("false");  does not re-enable
 
         this.requestAnte(singleDeckGame);
+        singleDeckGame.resetPlayers();
 
         singleDeckGame.deal();
+
         let dealerHand = singleDeckGame.getDealerHand();
-        
-       // const dealerCards = document.querySelector(".dealer-hand");
         this.renderSingleCard(dealerHand.getCards()[0], dealerCards);
         this.renderHoleCard(dealerCards);
       
         let userHand = singleDeckGame.getUserHand();
-       // const userCards = document.querySelector(".user-hand");
         this.renderCards(userHand.getCards(), userCards);
-
-        // if (singleDeckGame.isUserBust() || singleDeckGame.isDealerBust()) {
-
-        //   this.stayButtonEvent(singleDeckGame);
-        // }
+      },
+      startListening(singleDeckGame,Result) {
+        const hitButton = document.querySelector(".actions__hit");
+        hitButton.addEventListener("click", () => this.hitButtonEvent(singleDeckGame, Result));
+        // respond to double button
+        const doubleButton = document.querySelector(".actions__double");
+        doubleButton.addEventListener("click", () => this.doubleButtonEvent(singleDeckGame, Result));
+        const stayButton = document.querySelector(".actions__stay");
+        stayButton.addEventListener("click", () => this.stayButtonEvent(singleDeckGame, Result));
+        const dealButton = document.querySelector(".actions__deal");
+        dealButton.addEventListener("click", () => {
+          this.startAHand(singleDeckGame);
+        });
       }
 }

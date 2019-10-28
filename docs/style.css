@@ -1,7 +1,14 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
 main {
     display: grid;
     grid-template-columns: 200px auto 150px;
     height: 100%;
+    background-color: green;
 }
 
 .actions-box {
@@ -36,38 +43,43 @@ button {
 .game {
     display: grid;
     grid-template-rows: 200px auto 200px;
+    
 }
 
-.game-menu {
+/* .game-menu {
     display: flex;
     align-content: center;
     padding: 1rem;
     border: 1px solid;
     border-color: black;
-}
+} */
 
 header {
-    display: grid;
-    grid-template-columns: auto 150px;
-    align-self: center;
-    justify-self: center;
-    border: 1px solid;
+    display: flex;
+    
+    align-content: center;
+    justify-content: center;
+    border: 3px solid;
     border-color: black;
     background-color: lightgrey;
-
+    
+    padding:2rem;
 }
 
 h1 {
     display: grid;
     align-self: center;
     justify-self: center;
+    font-size: 4rem;
 }
+
+
 
 .left-sidebar {
     height: 100%;
     border: 1px solid;
     border-color: black;
-    background-color: lightcoral;
+    background-color: lightgrey;
 }
 
 .menu-buttons {
@@ -83,7 +95,7 @@ h1 {
     height: 100%;
     border: 1px solid;
     border-color: black;
-    background-color: lightcoral;
+    background-color: lightgrey;
 }
 
 .pot {
@@ -93,8 +105,9 @@ h1 {
     padding: 2rem;
     margin: 2rem;
     border: 1px solid black;
-
-
+    font-size: 40px;
+    font-style: bold;
+    background-color: rgb(21, 134, 78);
 }
 
 .score-box {
@@ -119,7 +132,10 @@ h1 {
     padding: 10px;
     border-radius: 10%;
     box-shadow: 12px 12px 2px 1px rgba(4, 37, 17, 0.2);
+    background-color: lightgoldenrodyellow;
    }
+
+.value-container{  font-size: 40px;}
 
 .dealer-hand,.user-hand{
    
@@ -132,4 +148,7 @@ h1 {
     border-radius: 1.0;
     }
 
+.win,.loss,.push,.chip-count,.win-count,.loss-count,.push-count{
 
+    font-size: 30px;
+}
