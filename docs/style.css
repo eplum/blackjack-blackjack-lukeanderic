@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+main {
+    display: grid;
+    grid-template-columns: 200px auto 150px;
+    height: 100%;
+    background-color: green;
+}
+
+.actions-box {
+    border: 1px solid;
+    border-color: black;
+    background-color: red;
+    padding: 1rem;
+}
+
+.actions__round {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: black;
+    background-color: yellow;
+    margin: 1rem;
+}
+
+button {
+    margin: 1rem;
+}
+
+.deal-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightseagreen;
+    margin: 1rem;
+}
+
+.game {
+    display: grid;
+    grid-template-rows: 200px auto 200px;
+    
+}
+
+/* .game-menu {
+    display: flex;
+    align-content: center;
+    padding: 1rem;
+    border: 1px solid;
+    border-color: black;
+} */
+
+header {
+    display: flex;
+    
+    align-content: center;
+    justify-content: center;
+    border: 3px solid;
+    border-color: black;
+    background-color: lightgrey;
+    
+    padding:2rem;
+}
+
+h1 {
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    font-size: 4rem;
+}
+
+
+
+.left-sidebar {
+    height: 100%;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightgrey;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 1rem;
+    border: 1px solid;
+    border-color: black;
+}
+
+.right-sidebar {
+    height: 100%;
+    border: 1px solid;
+    border-color: black;
+    background-color: lightgrey;
+}
+
+.pot {
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    padding: 2rem;
+    margin: 2rem;
+    border: 1px solid black;
+    font-size: 40px;
+    font-style: bold;
+    background-color: rgb(21, 134, 78);
+}
+
+.score-box {
+    border: 1px solid;
+    border-color: black;
+    background-color: red;
+    padding: 1rem;
+    
+
+}
+
+.playing-card {
+    box-sizing:border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100px;
+    height: 140px;
+    margin: 5px;
+    border: solid ;
+    border-color: #000000;
+    padding: 10px;
+    border-radius: 10%;
+    box-shadow: 12px 12px 2px 1px rgba(4, 37, 17, 0.2);
+    background-color: lightgoldenrodyellow;
+   }
+
+.value-container{  font-size: 40px;}
+
+.dealer-hand,.user-hand{
+   
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border: 5px, solid ;
+    border-color: #000000;
+    padding: 20px;
+    border-radius: 1.0;
+    }
+
+.win,.loss,.push,.chip-count,.win-count,.loss-count,.push-count{
+
+    font-size: 30px;
+}
